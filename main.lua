@@ -243,7 +243,6 @@ local Dropdown = Visual:AddDropdown({
 				repeat task.wait()
 				until selectedPlayer.Character and selectedPlayer.Character:FindFirstChild("Humanoid")
 
-				-- เช็คว่าไม่ใช่ตัวเก่า
 				if spectating and currentTarget == selectedPlayer then
 					Camera.CameraSubject = selectedPlayer.Character.Humanoid
 				end
@@ -262,7 +261,7 @@ Players.PlayerRemoving:Connect(function()
 end)
 
 Visual:AddToggle({
-	Name = "Spectate 👁️",
+	Name = "Spectate",
 	Default = false,
 	Callback = function(Value)
 		spectating = Value
@@ -462,7 +461,6 @@ mouse.Button1Down:Connect(function()
 	end
 end)
 
-
 local player = game.Players.LocalPlayer
 local speedValue = 16 -- จำค่า
 Movement:AddSlider({
@@ -473,7 +471,7 @@ Movement:AddSlider({
 	Increment = 1,
 	ValueName = "Speed",
 	Callback = function(Value)
-		speedValue = Value -- 🔥 จำค่าไว้
+		speedValue = Value
 		
 		local char = player.Character
 		if char and char:FindFirstChild("Humanoid") then
@@ -508,7 +506,7 @@ local function setJump(value)
 end
 player.CharacterAdded:Connect(function(char)
 	local humanoid = char:WaitForChild("Humanoid")
-	task.wait(0.1) -- กันบางเกม override ค่า
+	task.wait(0.1)  
 	applyJump(char)
 end)
 Movement:AddSlider({
@@ -583,9 +581,9 @@ Misc:AddButton({
 	end
 })
 
+
 local fps = false
 local saved = {}
-
 Misc:AddToggle({
 	Name = "FPS Boost",
 	Default = false,
@@ -664,7 +662,7 @@ Visual:AddToggle({
 			if v:IsA("BasePart") then
 				if xray then
 					if v.Name ~= "HumanoidRootPart" then
-						v.LocalTransparencyModifier = 0.7 -- 🔥 ปรับความโปร่ง
+						v.LocalTransparencyModifier = 0.7
 					end
 				else
 					v.LocalTransparencyModifier = 0
